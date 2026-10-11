@@ -1,7 +1,10 @@
 package com.example.orderservice.controller;
 
+import com.example.orderservice.entity.Order;
 import com.example.orderservice.service.OrderService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,8 +17,8 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/health-check")
-    public String healthCheck() {
-        return orderService.healthCheck();
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> getOrder(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.getById(id));
     }
 }
